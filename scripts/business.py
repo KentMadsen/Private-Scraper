@@ -4,6 +4,8 @@ from scripts.network import Network
 
 
 class Business:
+    """ """
+
     def __init__(self):
         #
         self.databases = []

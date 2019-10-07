@@ -3,6 +3,7 @@ from scripts import data_fields
 
 
 class Link:
+    """ """
     def __init__(self):
         self.data = {
             data_fields.field_link: None,
@@ -63,6 +64,8 @@ class Link:
 
 #
 class Network:
+    """ """
+
     def __init__(self):
         print('')
 
@@ -72,6 +75,8 @@ class Network:
 
 
 class Buffer:
+    """ """
+
     def __init__(self):
         print('')
 

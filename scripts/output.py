@@ -3,7 +3,7 @@ import scripts.generic
 
 
 def print_message(message, exception, var_type):
-
+    """ """
 
     now = scripts.generic.timestamp_now()
 

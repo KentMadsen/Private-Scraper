@@ -5,6 +5,7 @@ from scripts import static_data
 
 
 class Application:
+    """ """
 
     def __init__(self):
         self.business_layer = Business()
