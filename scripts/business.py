@@ -1,6 +1,6 @@
 from scripts.database import Database
-from scripts.crawler import Crawler
-from scripts.network import Network
+from scripts.domain.crawler import Crawler
+from scripts.domain.entities.network import Network
 
 
 class Business:

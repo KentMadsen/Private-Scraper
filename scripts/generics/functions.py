@@ -2,9 +2,8 @@
 import calendar
 
 import time
-from datetime import datetime
 
-from scripts import data_fields
+from scripts.globals import data_fields
 
 
 #

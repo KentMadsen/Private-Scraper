@@ -5,7 +5,6 @@ class Crawler:
         self.title = None
         self.url = None
 
-
     def set_url(self, VARIABLE_VALUE):
         self.url = VARIABLE_VALUE
 

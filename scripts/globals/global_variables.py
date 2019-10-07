@@ -16,7 +16,6 @@ Global_Maximum_Message = 500
 
 global_domain_lock = True
 
-
 #
 def access_maximum_message():
     global Global_Maximum_Message

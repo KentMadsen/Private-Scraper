@@ -1,11 +1,11 @@
-import scripts.data_fields
-import scripts.generic
+import scripts.globals.data_fields
+import scripts.generics.functions
 
 
 def print_message(message, exception, var_type):
     """ """
 
-    now = scripts.generic.timestamp_now()
+    now = scripts.generics.functions.timestamp_now()
 
     #
     if is_str_elements_equal(var_type, field_special_major) and scripts.globals.is_major_errors_allowed():

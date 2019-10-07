@@ -1,5 +1,3 @@
-from scripts import entities
-
 global_messages = [
 
 ]

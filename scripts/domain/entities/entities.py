@@ -1,5 +1,4 @@
-from scripts import generic
-from scripts import data_fields
+from scripts.globals import data_fields
 
 
 class Link:

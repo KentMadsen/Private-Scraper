@@ -101,6 +101,7 @@ def asft_message():
 def asft_debug_status():
     return access_static__text__field_debug_status()
 
+
 def asft_error_major():
     return access_static_field__text__error__major_error()
 
