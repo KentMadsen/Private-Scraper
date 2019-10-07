@@ -3,3 +3,11 @@
 
 .idea/*
 .idea/
+
+*.iml
+
+*.xml
+*.json
+
+./scripts/__pycache__/*
+scripts/__pycache__/*
