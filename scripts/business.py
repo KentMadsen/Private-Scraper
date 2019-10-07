@@ -30,6 +30,11 @@ class Business:
     def setup_database(self):
         current = Database()
 
+        current.set_database("crawler_tests")
+        current.set_hostname("localhost")
+
+        current.set_username("root")
+        current.set_password("Epc63gez")
 
         self.databases.append(current)
 
@@ -105,6 +110,7 @@ class Business:
             print("crawling - " + str(self.get_position()) + " : " + uri)
 
             self.next()
+
 
             #
             if self.get_position() == len(self.temporary_storage_for_uris):
