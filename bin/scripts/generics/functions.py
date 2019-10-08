@@ -3,7 +3,7 @@ import calendar
 
 import time
 
-from scripts.globals import data_fields
+from bin.scripts.globals import data_fields
 
 
 #

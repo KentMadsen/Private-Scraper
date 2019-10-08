@@ -1,6 +1,6 @@
-from scripts.globals import global_variables, static_data
+from bin.scripts.globals import global_variables, static_data
 
-from scripts.business import Business
+from bin.scripts.business import Business
 
 
 class Application:

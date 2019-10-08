@@ -1,7 +1,8 @@
-from scripts.database import Database
-from scripts.domain.crawler import Crawler
-from scripts.domain.entities.network import Network
-from scripts.domain.entities.buffer import Buffer
+# Domain Area
+from bin.scripts.database import Database
+from bin.scripts.domain.crawler import Crawler
+from bin.scripts.entities.network import Network
+from bin.scripts.entities.buffer import Buffer
 
 
 class Business:
@@ -18,8 +19,10 @@ class Business:
 
         #
         self.buffer = Buffer()
+        self.history = None
 
         self.current_pos = 0
+        self.explore = False
 
         self.flag_is_ready_output = False
 
@@ -70,7 +73,7 @@ class Business:
         for database in self.databases:
             database.connect_pipeline()
 
-            records = database.get_records('SELECT content FROM seeds order by content;')
+            records = database.get_records('SELECT content FROM seeds_available order by content LIMIT 100;')
 
             for record in records:
                 current_url = str(record[0])
@@ -90,6 +93,9 @@ class Business:
 
     #
     def ready_queue(self):
+        self.buffer.sort()
+
+        # Add to internal map representation
         for uri in self.buffer.get_buffer():
             self.network.add_uri(uri)
 
@@ -100,7 +106,7 @@ class Business:
 
         while still_working:
             uri = self.get_current_value()
-            print("crawling - " + str(self.get_position()) + " : " + str(uri))
+            #print("crawling - " + str(self.get_position()) + " : " + str(uri))
 
             #
             self.next()
@@ -114,7 +120,7 @@ class Business:
 
     # Stage: Garbage Collection
     def stage_garbage_collection(self):
-
+        self.buffer.clean()
         return None
 
     def output(self):

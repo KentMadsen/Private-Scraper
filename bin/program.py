@@ -1,4 +1,4 @@
-from scripts.application import Application
+from bin.scripts.application import Application
 
 main_entry_function_name = '__main__'
 

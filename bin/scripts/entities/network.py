@@ -1,6 +1,3 @@
-import scripts.generics.functions
-
-
 class Network:
     """ """
 

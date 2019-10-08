@@ -12,17 +12,17 @@
 *.log
 *.exe
 
-./scripts/__pycache__/*
-scripts/__pycache__/*
+bin/scripts/__pycache__/*
+bin/scripts/__pycache__/*
 
-./scripts/domain/__pycache__/*
-scripts/domain/__pycache__/*
+bin/scripts/domain/__pycache__/*
+bin/scripts/domain/__pycache__/*
 
-./scripts/domain/entities/__pycache__/*
-scripts/domain/entities/__pycache__/*
+bin/scripts/domain/entities/__pycache__/*
+bin/scripts/domain/entities/__pycache__/*
 
-./scripts/generics/__pycache__/*
-scripts/generics/__pycache__/*
+bin/scripts/generics/__pycache__/*
+bin/scripts/generics/__pycache__/*
 
-./scripts/globals/__pycache__/*
-scripts/globals/__pycache__/*
+bin/scripts/globals/__pycache__/*
+bin/scripts/globals/__pycache__/*

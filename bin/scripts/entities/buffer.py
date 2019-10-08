@@ -1,4 +1,5 @@
-from scripts.domain.entities.temp_link import TemporaryLink
+from bin.scripts.entities.temp_link import TemporaryLink
+import operator
 
 zero = 0
 
@@ -32,6 +33,11 @@ class Buffer:
 
         return
 
+    def sort(self):
+        self.data.sort(key=operator.attrgetter('domain', 'url'))
+
+        return self.data
+
     def size(self):
         return len(self.data)
 
@@ -43,6 +49,9 @@ class Buffer:
             if link.get_url() == uri:
                 return True
         return False
+
+    def clean(self):
+        return
 
     def get_buffer(self):
         return self.data
