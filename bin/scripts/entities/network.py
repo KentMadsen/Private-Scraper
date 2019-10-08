@@ -1,6 +1,8 @@
 from bin.scripts.entities.link import Link
 from bin.scripts.entities.domain import Domain
 
+import operator
+
 zero = 0
 
 
@@ -18,7 +20,11 @@ class Network:
             print('network: registry is empty')
         else:
             for entry in self.registry:
-                print(entry)
+
+                print('Domain:' + str(entry.get_name()))
+
+                for url in entry.get_urls():
+                    print('    Url:' + str(url.get_content()))
 
         return
 
@@ -38,7 +44,7 @@ class Network:
         return element
 
     def exist_domain(self, tmp_link):
-        if len(self.registry) == 0:
+        if len(self.registry) == zero:
             return False
 
         for domain in self.registry:
@@ -67,3 +73,10 @@ class Network:
                 return domain.exist_url(tmp_link.get_url())
 
         return False
+
+    def sort(self):
+        self.registry.sort(key=operator.attrgetter('name'))
+        for domain in self.registry:
+            domain.sort_list()
+
+        return self.registry

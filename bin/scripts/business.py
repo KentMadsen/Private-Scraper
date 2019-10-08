@@ -15,6 +15,8 @@ class Business:
     def __init__(self):
         #
         self.databases = []
+        self.program_layer = None
+
         #
         self.crawler = Crawler()
         #self.crawler.initialise()
@@ -84,7 +86,7 @@ class Business:
         for database in self.databases:
             database.connect_pipeline()
 
-            records = database.get_records('SELECT content FROM seeds_available order by content LIMIT 100;')
+            records = database.get_records('SELECT content FROM seeds_available order by content;')
 
             for record in records:
                 current_url = str(record[zero])
@@ -108,8 +110,12 @@ class Business:
 
         # process the element
         #   # Move to internal representation of the map
-        for uri in self.buffer.get_buffer():
-            self.network.add_uri(uri)
+        for tmp_link in self.buffer.get_buffer():
+            self.network.add_domain(tmp_link)
+            self.network.add_uri(tmp_link)
+
+        self.network.sort()
+        self.network.status()
 
         return None
 
@@ -119,7 +125,6 @@ class Business:
         while still_working:
             # retrieve current value at the given position
             uri = self.get_current_url()
-
 
             # flag is done and ready to be removed from the buffer. Move to the next element
             self.current_value_is_done()
@@ -162,6 +167,14 @@ class Business:
         self.flag_is_ready_output = value
 
         return self.flag_is_ready_output
+
+    #
+    def set_program_layer(self,value):
+        self.program_layer = value
+        return self.get_program_layer()
+
+    def get_program_layer(self):
+        return self.program_layer
 
 
 

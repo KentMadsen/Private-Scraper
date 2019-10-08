@@ -1,3 +1,6 @@
+import operator
+
+
 class Domain:
     """ """
 
@@ -31,4 +34,8 @@ class Domain:
     def set_name(self, variable_value):
         self.name = variable_value
         return self.get_name()
+
+    def sort_list(self):
+        self.urls.sort(key=operator.attrgetter('content'))
+        return
 

@@ -2,10 +2,10 @@ from bin.scripts.entities.temp_link import TemporaryLink
 import operator
 
 zero = 0
-
+debug = False
 
 class Buffer:
-    global zero
+    global zero, debug
     """ """
 
     def __init__(self):
@@ -28,7 +28,8 @@ class Buffer:
 
     def status(self):
         for e in self.data:
-            print("buffer------------------------------------ \r\n" + e.print() + "\r\n")
+            if debug:
+                print("buffer------------------------------------ \r\n" + e.print() + "\r\n")
 
         return None
 
