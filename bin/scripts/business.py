@@ -106,7 +106,8 @@ class Business:
     def ready_queue(self):
         self.buffer.sort()
 
-        # Add to internal map representation
+        # process the element
+        #   # Move to internal representation of the map
         for uri in self.buffer.get_buffer():
             self.network.add_uri(uri)
 
@@ -118,10 +119,6 @@ class Business:
         while still_working:
             # retrieve current value at the given position
             uri = self.get_current_url()
-
-            # process the element
-            #   # Move to internal representation of the map
-            self.network.add_uri(uri)
 
 
             # flag is done and ready to be removed from the buffer. Move to the next element
