@@ -24,6 +24,9 @@ class Counter:
     def reset(self):
         self.set_value(zero)
 
+    def is_zero(self):
+        return self.get_value() == zero
+
     def get_value(self):
         return self.value
 

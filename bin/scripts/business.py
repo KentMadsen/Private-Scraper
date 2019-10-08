@@ -51,14 +51,17 @@ class Business:
 
         self.databases.append(current)
 
-        return current
+        return self.databases
 
     # Stage: execution
     def stages(self):
         #
         self.transference_process()
+
+        #
         self.execute()
 
+        #
         self.stage_garbage_collection()
 
         return None
@@ -114,9 +117,11 @@ class Business:
 
         while still_working:
             # retrieve current value at the given position
-            uri = self.get_current_value()
+            uri = self.get_current_url()
 
             # process the element
+            #   # Move to internal representation of the map
+            self.network.add_uri(uri)
 
 
             # flag is done and ready to be removed from the buffer. Move to the next element
@@ -124,12 +129,14 @@ class Business:
             self.current_position.increment()
 
             #
-            if self.current_position.get_value() >= self.buffer.size():
+            if self.check_position():
                 still_working = False
                 self.current_position.reset()
 
-        print('Execution done')
         return
+
+    def check_position(self):
+        return self.current_position.get_value() >= self.buffer.size()
 
     # Stage: Garbage Collection
     def stage_garbage_collection(self):
@@ -137,30 +144,14 @@ class Business:
         return None
 
     def output(self):
-        if self.get_flags_is_ready_output():
-            self.ready_messages()
-
-            print(self.process_messages())
 
         return None
 
-    def ready_messages(self):
-        return self.get_flags_is_ready_output()
-
-    def is_messages_not_ready(self):
-        return not self.get_flags_is_ready_output()
-
-    def process_messages(self):
-        return_value = ''
-
-        return return_value
-
-    def current_messages_count(self):
-
-        return
-
-    def get_current_value(self):
+    def get_current_url(self):
         return self.buffer.get(self.current_position.get_value()).get_url()
+
+    def get_current_domain(self):
+        return self.buffer.get(self.current_position.get_value()).get_domain()
 
     def current_value_is_done(self):
         self.buffer.get(self.current_position.get_value()).set_flag_for_removal(True)
