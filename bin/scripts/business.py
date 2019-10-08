@@ -3,9 +3,13 @@ from bin.scripts.database import Database
 from bin.scripts.domain.crawler import Crawler
 from bin.scripts.entities.network import Network
 from bin.scripts.entities.buffer import Buffer
+from bin.scripts.entities.counter import Counter
+
+zero = 0
 
 
 class Business:
+    global zero
     """ """
 
     def __init__(self):
@@ -21,7 +25,8 @@ class Business:
         self.buffer = Buffer()
         self.history = None
 
-        self.current_pos = 0
+        self.current_position = Counter()
+
         self.explore = False
 
         self.flag_is_ready_output = False
@@ -66,6 +71,9 @@ class Business:
         #
         self.ready_queue()
 
+        #
+        self.buffer.status()
+
         return None
 
     #
@@ -76,7 +84,7 @@ class Business:
             records = database.get_records('SELECT content FROM seeds_available order by content LIMIT 100;')
 
             for record in records:
-                current_url = str(record[0])
+                current_url = str(record[zero])
 
                 if not self.buffer.exist(current_url):
                     self.buffer.add_element(current_url)
@@ -105,17 +113,22 @@ class Business:
         still_working = True
 
         while still_working:
+            # retrieve current value at the given position
             uri = self.get_current_value()
-            #print("crawling - " + str(self.get_position()) + " : " + str(uri))
+
+            # process the element
+
+
+            # flag is done and ready to be removed from the buffer. Move to the next element
+            self.current_value_is_done()
+            self.current_position.increment()
 
             #
-            self.next()
-
-            #
-            if self.get_position() >= self.buffer.size():
+            if self.current_position.get_value() >= self.buffer.size():
                 still_working = False
-                self.set_position(0)
+                self.current_position.reset()
 
+        print('Execution done')
         return
 
     # Stage: Garbage Collection
@@ -146,23 +159,11 @@ class Business:
 
         return
 
-    def get_position(self):
-        return self.current_pos
-
-    def set_position(self, VARIABLE_VALUE):
-        self.current_pos = VARIABLE_VALUE
-        return self.current_pos
-
-    def next(self):
-        self.set_position( (self.get_position() + 1) )
-        return self.get_position()
-
-    def previous(self):
-        self.set_position( (self.get_position() - 1) )
-        return self.get_position()
-
     def get_current_value(self):
-        return self.buffer.get(self.current_pos).get_url()
+        return self.buffer.get(self.current_position.get_value()).get_url()
+
+    def current_value_is_done(self):
+        self.buffer.get(self.current_position.get_value()).set_flag_for_removal(True)
 
     # Accessor
         # self.flag_is_ready_output

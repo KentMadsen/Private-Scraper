@@ -22,10 +22,15 @@ class Buffer:
         link.parse_host()
         link.register()
 
-        print("buffer------------------------------------ \r\n" + str(link.print()) + '\r\n')
         self.data.append(link)
 
         return self.data
+
+    def status(self):
+        for e in self.data:
+            print("buffer------------------------------------ \r\n" + e.print() + "\r\n")
+
+        return None
 
     def add_elements_from_list(self, list_of_elements):
         for element in list_of_elements:
