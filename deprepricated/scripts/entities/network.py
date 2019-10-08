@@ -1,5 +1,5 @@
-from bin.scripts.entities.link import Link
-from bin.scripts.entities.domain import Domain
+from deprepricated.scripts.entities.link import Link
+from deprepricated.scripts.entities.domain import Domain
 
 import operator
 

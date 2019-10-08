@@ -1,4 +1,4 @@
-from bin.scripts.business import Business
+from deprepricated.scripts.business import Business
 
 
 class Application:

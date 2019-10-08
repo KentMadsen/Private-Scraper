@@ -1,8 +1,8 @@
 # Domain Area
-from bin.scripts.database import Database
-from bin.scripts.entities.network import Network
-from bin.scripts.entities.buffer import Buffer
-from bin.scripts.entities.counter import Counter
+from deprepricated.scripts.database import Database
+from deprepricated.scripts.entities.network import Network
+from deprepricated.scripts.entities.buffer import Buffer
+from deprepricated.scripts.entities.counter import Counter
 
 zero = 0
 

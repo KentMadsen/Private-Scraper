@@ -1,4 +1,4 @@
-from bin.scripts.entities.temp_link import TemporaryLink
+from deprepricated.scripts.entities.temp_link import TemporaryLink
 import operator
 
 zero = 0

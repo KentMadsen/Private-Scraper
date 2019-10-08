@@ -1,4 +1,4 @@
-from bin.scripts.application import Application
+from deprepricated.scripts.application import Application
 
 main_entry_function_name = '__main__'
 

@@ -73,19 +73,24 @@ class Database:
 
     # Accessor
     def set_hostname(self, VARIABLE_VALUE):
-        self.hostname = VARIABLE_VALUE
+        if isinstance(VARIABLE_VALUE, str):
+            self.hostname = VARIABLE_VALUE
         return self.hostname
 
     def set_database(self, VARIABLE_VALUE):
-        self.database = VARIABLE_VALUE
+        if isinstance(VARIABLE_VALUE, str):
+            self.database = VARIABLE_VALUE
         return self.database
 
     def set_username(self, VARIABLE_VALUE):
-        self.username = VARIABLE_VALUE
+        if isinstance(VARIABLE_VALUE, str):
+            self.username = VARIABLE_VALUE
         return self.username
 
     def set_password(self, VARIABLE_VALUE):
-        self.password = VARIABLE_VALUE
+        if isinstance(VARIABLE_VALUE, str):
+            self.password = VARIABLE_VALUE
+
         return self.password
 
     def get_updated(self):
