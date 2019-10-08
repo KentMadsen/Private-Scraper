@@ -1,6 +1,7 @@
 from scripts.database import Database
 from scripts.domain.crawler import Crawler
 from scripts.domain.entities.network import Network
+from scripts.domain.entities.buffer import Buffer
 
 
 class Business:
@@ -11,10 +12,12 @@ class Business:
         self.databases = []
         #
         self.crawler = Crawler()
+        #self.crawler.initialise()
+
         self.network = Network()
 
         #
-        self.temporary_storage_for_uris = []
+        self.buffer = Buffer()
 
         self.current_pos = 0
 
@@ -58,9 +61,6 @@ class Business:
         self.fetch_queue()
 
         #
-        self.sort_network()
-
-        #
         self.ready_queue()
 
         return None
@@ -75,32 +75,23 @@ class Business:
             for record in records:
                 current_url = str(record[0])
 
-                if not self.exist_uri_in_buffer(current_url):
-                    print('Added to temperary registry: ' + current_url)
-                    self.temporary_storage_for_uris.append(current_url)
+                if not self.buffer.exist(current_url):
+                    self.buffer.add_element(current_url)
 
             database.finalize()
 
-        return self.temporary_storage_for_uris
+        return self.buffer
 
     def exist_uri_in_buffer(self, VARIABLE_URI):
-        if len(self.temporary_storage_for_uris) == 0:
+        if self.buffer.size_is_zero():
             return False
 
-        for uri in self.temporary_storage_for_uris:
-            if uri == VARIABLE_URI:
-                return True
+        return self.buffer.exist(VARIABLE_URI)
 
-        return False
-
+    #
     def ready_queue(self):
-
-
-        return None
-
-    def sort_network(self):
-        # Sort values by domain, name
-
+        for uri in self.buffer.get_buffer():
+            self.network.add_uri(uri)
 
         return None
 
@@ -109,13 +100,13 @@ class Business:
 
         while still_working:
             uri = self.get_current_value()
-            print("crawling - " + str(self.get_position()) + " : " + uri)
-
-            self.next()
-
+            print("crawling - " + str(self.get_position()) + " : " + str(uri))
 
             #
-            if self.get_position() == len(self.temporary_storage_for_uris):
+            self.next()
+
+            #
+            if self.get_position() >= self.buffer.size():
                 still_working = False
                 self.set_position(0)
 
@@ -165,7 +156,7 @@ class Business:
         return self.get_position()
 
     def get_current_value(self):
-        return self.temporary_storage_for_uris[self.current_pos]
+        return self.buffer.get(self.current_pos).get_url()
 
     # Accessor
         # self.flag_is_ready_output

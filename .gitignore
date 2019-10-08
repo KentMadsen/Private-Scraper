@@ -9,6 +9,9 @@
 *.xml
 *.json
 
+*.log
+*.exe
+
 ./scripts/__pycache__/*
 scripts/__pycache__/*
 

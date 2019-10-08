@@ -7,33 +7,23 @@ class Network:
     def __init__(self):
         self.registry = []
 
+    def status(self):
+        if len(self.registry) == 0:
+            print('network: registry is empty')
+        else:
+            for entry in self.registry:
+                print(entry)
+
+        return
+
     def add_domain(self, domain_name):
-        element = {
-            'domain name':domain_name,
-            'urls': [],
-            'registered': scripts.generics.functions.timestamp_now()
-        }
 
-        element['domain name'] = domain_name
-
-        self.registry.append(element)
-
-        return element
-
-    def add_uri(self, url_name, domain_name):
-        element = {
-            'uri': url_name,
-            'registered' : scripts.generics.functions.timestamp_now(),
-        }
-
-        for domain_element in self.registry:
-            if domain_element['domain name'] == domain_name:
-                domain_element['urls'].append(element)
 
         return None
 
-    def exist_uri(self, url_name, domain_name):
-        return None
+    def add_uri(self, url_name):
 
-    def exist_domain(self, domain_name):
+
+
+
         return None
