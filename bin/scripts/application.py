@@ -5,7 +5,11 @@ class Application:
     """ """
 
     def __init__(self):
+        self.program_layer = None
+
         self.business_layer = Business()
+        self.business_layer.set_business_layer(self.business_layer)
+
         self.continue_process = True
 
     def initialise(self):
@@ -20,17 +24,18 @@ class Application:
         return None
 
     def done(self):
-        print(self.access_output())
+        print('Completed')
 
     # Accessor
-    def access_output(self):
-        return self.output
-
-    def edit_output(self, VARIABLE_VALUE):
-        self.output = VARIABLE_VALUE
-
     def set_program_layer(self, variable_value):
-        self.business_layer.set_program_layer(variable_value)
+        self.program_layer = variable_value
+        return self.get_program_layer()
+
+    def get_program_layer(self):
+        return self.program_layer
+
+    def append_structure_to_children(self):
+        self.business_layer.set_program_layer(self.get_program_layer())
         return
 
     def get_continue_process(self):

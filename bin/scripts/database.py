@@ -116,7 +116,6 @@ class Database:
         except Error:
             print(str(Error))
 
-
         return records
 
     def print_status(self):

@@ -1,6 +1,5 @@
 # Domain Area
 from bin.scripts.database import Database
-from bin.scripts.domain.crawler import Crawler
 from bin.scripts.entities.network import Network
 from bin.scripts.entities.buffer import Buffer
 from bin.scripts.entities.counter import Counter
@@ -15,11 +14,9 @@ class Business:
     def __init__(self):
         #
         self.databases = []
-        self.program_layer = None
 
-        #
-        self.crawler = Crawler()
-        #self.crawler.initialise()
+        self.program_layer = None
+        self.business_layer = None
 
         self.network = Network()
 
@@ -57,6 +54,8 @@ class Business:
 
     # Stage: execution
     def stages(self):
+        self.program_layer.set_continue_process(False)
+
         #
         self.transference_process()
 
@@ -120,9 +119,9 @@ class Business:
         return None
 
     def execute(self):
-        still_working = True
+        continue_execution_process = True
 
-        while still_working:
+        while continue_execution_process:
             # retrieve current value at the given position
             uri = self.get_current_url()
 
@@ -132,7 +131,7 @@ class Business:
 
             #
             if self.check_position():
-                still_working = False
+                continue_execution_process = False
                 self.current_position.reset()
 
         return
@@ -143,10 +142,6 @@ class Business:
     # Stage: Garbage Collection
     def stage_garbage_collection(self):
         self.buffer.clean()
-        return None
-
-    def output(self):
-
         return None
 
     def get_current_url(self):
@@ -169,12 +164,21 @@ class Business:
         return self.flag_is_ready_output
 
     #
-    def set_program_layer(self,value):
+    def set_program_layer(self, value):
         self.program_layer = value
         return self.get_program_layer()
 
     def get_program_layer(self):
         return self.program_layer
+
+    def set_business_layer(self, value):
+        self.business_layer = value
+        return self.get_business_layer()
+
+    def get_business_layer(self):
+        return self.business_layer
+
+
 
 
 
